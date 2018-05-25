@@ -9,7 +9,7 @@ RUN echo   "elsearch soft nproc 2048" >> /etc/security/limits.conf
 RUN echo   "elsearch hard nproc 4096"  >>/etc/security/limits.conf
 RUN groupadd elsearch
 RUN useradd elsearch -g elsearch
-RUN sed -i s/2g/256m/g elasticsearch-5.6.9/config/jvm.options
+RUN sed -i s/2g/256m/g /usr/local/elasticsearch-5.6.9/config/jvm.options
 RUN chown elsearch:elsearch /usr/local/elasticsearch-5.6.9
 RUN usermod elsearch -G root
 RUN mkdir -p /da/es/data
