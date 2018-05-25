@@ -5,9 +5,7 @@ RUN tar xzvf /usr/local/elasticsearch-5.6.9.tar.gz
 COPY elasticsearch.yml  /usr/local/elasticsearch-5.6.9/config/
 RUN echo   "elsearch soft nofile 65536" >>/etc/security/limits.conf
 RUN echo   "elsearch hard nofile 131072" >>/etc/security/limits.conf
-
 RUN echo   "elsearch soft nproc 2048" >> /etc/security/limits.conf
- 
 RUN echo   "elsearch hard nproc 4096"  >>/etc/security/limits.conf
 RUN groupadd elsearch
 RUN useradd elsearch -g elsearch
