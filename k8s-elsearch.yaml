@@ -1,4 +1,5 @@
 apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
  name: elasticsearch-dpy
  labels:
@@ -8,43 +9,43 @@ spec:
  replicas: 1
  selector:
   matchLabels:
-   k8s-app: elasticsearch-pod
+   k8s-app: elasticsearch
   matchExpressions:
    - {key: k8s-app,operator: In,values: [elasticsearch]}
-  template:
-   metadata:
-    name: elasticsearch-pod
-    labels:
-     k8s-app: elasticsearch
-   spec:
-    containers:
-    - name: elasticsearch-pod
-      image: dockeryanxiao/elsearch
-      imgaePullPolicy: Always
-      resources:
-       limits:
-        cpu: 500m
-        memory: 500Mi
-       requests:
-        cpu: 250m
-        memory: 256Mi
-      ports:
-      - containerPort: 9200
-        name: svc
-        protocl: TCP
-      - containerPort: 9300
-        name: db
-        protocl: TCP
-      volumeMounts:
-      - mountPath: /da/es/data
-        name: esdata
-        mountPath: /da/es/logs
-        name: eslogs
-    volume:
-    - name: esdata
-      emptyDir: {}
-      name: eslogs
-      emptyDir: {}
+ template:
+  metadata:
+   name: elasticsearch-pod
+   labels:
+    k8s-app: elasticsearch
+  spec:
+   containers:
+   - name: elasticsearch-pod
+     image: dockeryanxiao/elsearch
+     resources:
+      limits:
+       cpu: 500m
+       memory: 500Mi
+      requests:
+       cpu: 250m
+       memory: 256Mi
+     ports:
+     - containerPort: 9200
+       name: svc
+       containerPort: 9300
+       name: db
+     volumeMounts:
+     - name: esdata
+       mountPath: /da/es/data
+       readOnly: false
+       name: eslogs
+       mountPath: /da/es/logs
+       readOnly: false
+   volumes:
+   - name: esdata
+     emptyDir: {}
+     name: eslogs
+     emptyDir: {}
+
       
       
         
