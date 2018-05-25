@@ -20,7 +20,7 @@ spec:
     containers:
     - name: elasticsearch-pod
       image: dockeryanxiao/elsearch
-      imgaePullPolicy: IfNotPresen
+      imgaePullPolicy: Always
       resources:
        limits:
         cpu: 500m
@@ -35,6 +35,18 @@ spec:
       - containerPort: 9300
         name: db
         protocl: TCP
+      volumeMounts:
+      - mountPath: /da/es/data
+        name: esdata
+        mountPath: /da/es/logs
+        name: eslogs
+    volume:
+    - name: esdata
+      emptyDir: {}
+      name: eslogs
+      emptyDir: {}
+      
+      
         
      
     
