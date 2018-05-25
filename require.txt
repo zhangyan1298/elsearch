@@ -1,0 +1,9 @@
+1.node host nedd setting follow options
+2.设置tempavaliable  vm.max_map_count=262144 
+sysctl -w vm.max_map_count=262144
+or
+permit avaliable
+centos7 and 6 5 release
+vi /etc/sysctl.conf to add 
+vm.max_map_count=262144
+save.
