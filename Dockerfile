@@ -1,5 +1,5 @@
 From ingensi/oracle-jdk 
-COPY elasticsearch-5.6.9.tar.gz /usr/local
+RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.9.tar.gz
 RUN yum -y install tar
 RUN tar xzvf /usr/local/elasticsearch-5.6.9.tar.gz
 RUN echo   "elsearch soft nofile 65536" >>/etc/security/limits.conf
