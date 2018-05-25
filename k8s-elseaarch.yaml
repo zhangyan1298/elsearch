@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+metadata:
+ name: elasticsearch-dpy
+ labels:
+  k8s-app: elasticsearch
+  kubernetes.io/cluster-service: "true"
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   k8s-app: elasticsearch-pod
+  matchExpressions:
+   - {key: k8s-app,operator: In,values: [elasticsearch]}
+  template:
+   metadata:
+    name: elasticsearch-pod
+    labels:
+     k8s-app: elasticsearch
+   spec:
+    containers:
+    - name: elasticsearch-pod
+      image: dockeryanxiao/elsearch
+      imgaePullPolicy: IfNotPresen
+      resources:
+       limits:
+        cpu: 500m
+        memory: 500Mi
+       requests:
+        cpu: 250m
+        memory: 256Mi
+      ports:
+      - containerPort: 9200
+        name: svc
+        protocl: TCP
+      - containerPort: 9300
+        name: db
+        protocl: TCP
+        
+     
+    
